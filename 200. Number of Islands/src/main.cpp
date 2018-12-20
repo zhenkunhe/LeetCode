@@ -4,64 +4,58 @@
 #include <unistd.h>
 using namespace std;
 
-struct node
-{
-	int i;
-	int j;
-	node(int i, int j) :
-			i(i), j(j)
-	{
-	}
-};
-
 class Solution
 {
 public:
 	int numIslands(vector<vector<char>>& grid)
 	{
-		if (grid.size() == 0) return 0;
-		vector<vector<char>> searchGrid(grid);
-		int result = 49, numR = searchGrid.size(), numC = searchGrid[0].size();
+		int nr = grid.size();
+		if (!nr) return 0;
+		int nc = grid[0].size();
+		int result = 0;
 
-		for (unsigned int i = 0; i < numR; i++)
+		for (int r = 0; r < nr; r++)
 		{
-			for (unsigned int j = 0; j < numC; j++)
+			for (int c = 0; c < nc; c++)
 			{
-				if (searchGrid[i][j] == '1')
+				if (grid[r][c] == '1')
 				{
-					queue<node> q;
-					q.push(node(i, j));
-					searchGrid[i][j] = ++result;
+					++result;
+					queue<pair<int, int>> q;
+					q.push( { r, c });
+					grid[r][c] = '0';
+
 					while (!q.empty())
 					{
-						node n = q.front();
+						pair<int, int> rc = q.front();
 						q.pop();
 
-						if (n.j > 0 && searchGrid[n.i][n.j - 1] == '1')
+						int row = rc.first, col = rc.second;
+						if (col > 0 && grid[row][col - 1] == '1')
 						{
-							q.push(node(n.i, n.j - 1));
-							searchGrid[n.i][n.j - 1] = result;
+							q.push( { row, col - 1 });
+							grid[row][col - 1] = '0';
 						}
-						if (n.j < numC - 1 && searchGrid[n.i][n.j + 1] == '1')
+						if (col < nc - 1 && grid[row][col + 1] == '1')
 						{
-							q.push(node(n.i, n.j + 1));
-							searchGrid[n.i][n.j + 1] = result;
+							q.push( { row, col + 1 });
+							grid[row][col + 1] = '0';
 						}
-						if (n.i > 0 && searchGrid[n.i - 1][n.j] == '1')
+						if (row > 0 && grid[row - 1][col] == '1')
 						{
-							q.push(node(n.i - 1, n.j));
-							searchGrid[n.i - 1][n.j] = result;
+							q.push( { row - 1, col });
+							grid[row - 1][col] = '0';
 						}
-						if (n.i < numR - 1 && searchGrid[n.i + 1][n.j] == '1')
+						if (row < nr - 1 && grid[row + 1][col] == '1')
 						{
-							q.push(node(n.i + 1, n.j));
-							searchGrid[n.i + 1][n.j] = result;
+							q.push( { row + 1, col });
+							grid[row + 1][col] = '0';
 						}
 					}
 				}
-			}
-		}
-		return result - 49;
+			}//end col
+		}//end row
+		return result;
 	}
 };
 
