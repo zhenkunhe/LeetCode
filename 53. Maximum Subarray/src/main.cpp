@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <limits.h>
 using namespace std;
 
 class Solution
@@ -7,41 +8,21 @@ class Solution
 public:
 	int maxSubArray(vector<int>& nums)
 	{
-		vector<int> add;
-		int sum=0;
-		int min=nums[0],max=nums[0];
-		for (int i = 0; i < nums.size(); i++)
-		{
-			cout << nums[i]<<"\t";
-		}
-		cout << endl;
+		int max = INT_MIN, sum = 0;
 
-		for (int i = 0; i < nums.size(); i++)
+		for (auto i : nums)
 		{
-			sum += nums[i];
-			add.push_back(sum);
-			if (add[i]<=min)
-			{
-				min=add[i];
-			}
-			if (add[i]>max)
-			{
-				max=add[i];
-			}
-			cout << add[i]<<"\t";
+			sum = (sum > 0) ? sum + i : i;
+			if (sum > max) max = sum;
 		}
-
-		cout << endl;
-		cout << "min:"<<min<<endl;
-		cout << "max:"<<max<<endl;
-		return 0;
+		return max;
 	}
 };
 
 int main()
 {
 	Solution s;
-	vector<int> nums {-3,-2,-1 };
+	vector<int> nums { -1 };
 
 	s.maxSubArray(nums);
 	return 0;
