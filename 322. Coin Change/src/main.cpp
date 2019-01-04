@@ -9,6 +9,28 @@ class Solution
 public:
 	int coinChange(vector<int>& coins, int amount)
 	{
+		int result[amount + 1] = { -1 };
+		result[0] = 0;
+		for (int i = 1; i <= amount; i++)
+		{
+			int min = INT_MAX;
+			for (auto coin : coins)
+			{
+				int preIndex = i - coin;
+				if (preIndex >= 0 && result[preIndex] != -1 && result[preIndex] < min) min = result[preIndex];
+			}
+			result[i] = (min == INT_MAX) ? -1 : min+1;
+		}
+
+		return  result[amount];
+	}
+};
+
+class Solution2
+{
+public:
+	int coinChange(vector<int>& coins, int amount)
+	{
 		sort(coins.rbegin(), coins.rend());
 		int min = INT_MAX;
 		coinChange(coins, amount, 0, 0, min);
