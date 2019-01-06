@@ -17,11 +17,15 @@ public:
 		while (!q.empty())
 		{
 			string curStr = q.front();
-			string nextStr = mapPhone[digits[curStr.size()] - '1'];
-
-			for (auto c : nextStr)	q.push(curStr + c);
-			if (curStr.size() == digits.size()) res.push_back(curStr);
 			q.pop();
+
+			if (curStr.size() == digits.size())	res.push_back(curStr);
+			else
+			{
+				string nextStr = mapPhone[digits[curStr.size()] - '1'];
+				for (auto c : nextStr)	q.push(curStr + c);
+			}
+
 		}
 		return res;
 	}
