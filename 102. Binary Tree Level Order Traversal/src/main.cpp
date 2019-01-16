@@ -1,19 +1,9 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <tree.hpp>
 
 using namespace std;
-
-struct TreeNode
-{
-	int val;
-	TreeNode *left;
-	TreeNode *right;
-	TreeNode(int x) :
-			val(x), left(NULL), right(NULL)
-	{
-	}
-};
 
 class Solution
 {
@@ -77,11 +67,8 @@ public:
 int main()
 {
 	Solution2 s;
-	TreeNode* root = new TreeNode(3);
-	root->left = new TreeNode(9);
-	root->right = new TreeNode(20);
-	root->right->left = new TreeNode(15);
-	root->right->right = new TreeNode(7);
+	TreeNode* root = stringToTreeNode("[3,9,20,null,null,15,7]");
+	prettyPrintTree(root);
 
 	vector<vector<int>> res = s.levelOrder(root);
 	for (auto l : res)

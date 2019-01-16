@@ -2,19 +2,9 @@
 #include <algorithm>
 #include <vector>
 #include <unordered_map>
+#include <tree.hpp>
 
 using namespace std;
-
-struct TreeNode
-{
-	int val;
-	TreeNode *left;
-	TreeNode *right;
-	TreeNode(int x) :
-			val(x), left(NULL), right(NULL)
-	{
-	}
-};
 
 class Solution
 {
@@ -68,14 +58,7 @@ int main()
 	Solution s;
 	vector<int> pre { 1, 2, 4, 5, 3, 6, 7 };
 	vector<int> post { 4, 5, 2, 6, 7, 3, 1 };
-	TreeNode* res = s.constructFromPrePost(pre, post);
+	prettyPrintTree(s.constructFromPrePost(pre, post));
 
-	cout << res->val << endl;
-	cout << res->left->val << endl;
-	cout << res->right->val << endl;
-	cout << res->left->left->val << endl;
-	cout << res->left->right->val << endl;
-	cout << res->right->left->val << endl;
-	cout << res->right->right->val << endl;
 	return 0;
 }

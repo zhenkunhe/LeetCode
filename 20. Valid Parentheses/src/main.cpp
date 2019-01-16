@@ -12,19 +12,19 @@ public:
 		stack<char> stack;
 		for (auto c : s)
 		{
-			if (c == ')')
+			if ( c == ')' )
 			{
-				if (stack.empty() || stack.top() != '(') return false;
+				if ( stack.empty() || stack.top() != '(' ) return false;
 				stack.pop();
 			}
-			else if (c == ']')
+			else if ( c == ']' )
 			{
-				if (stack.empty() || stack.top() != '[') return false;
+				if ( stack.empty() || stack.top() != '[' ) return false;
 				stack.pop();
 			}
-			else if (c == '}')
+			else if ( c == '}' )
 			{
-				if (stack.empty() || stack.top() != '{') return false;
+				if ( stack.empty() || stack.top() != '{' ) return false;
 				stack.pop();
 			}
 			else stack.push(c);
@@ -47,9 +47,9 @@ public:
 		stack<char> stack;
 		for (auto c : s)
 		{
-			if (mappings.count(c))
+			if ( mappings.count(c) )
 			{
-				if (stack.empty() || stack.top() != mappings[c]) return false;
+				if ( stack.empty() || stack.top() != mappings[c] ) return false;
 				stack.pop();
 			}
 			else stack.push(c);

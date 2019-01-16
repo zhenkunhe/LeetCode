@@ -9,23 +9,18 @@ class Solution
 public:
 	string longestCommonPrefix(vector<string>& strs)
 	{
-		string result;
-		cout << result << endl;
-		while ()
+		string result = "";
+		if ( strs.size() == 0 ) return result;
+
+		for (unsigned int i = 0; i < strs[0].size(); i++)
 		{
 			for (string s : strs)
 			{
-				result.push_back(s.);
-				cout << s << endl;
-				for (int i = 0; i < s.size(); i++)
-				{
-					cout << s[i] << endl;
-					result.push_back(s[i]);
-				}
+				if ( strs[0][i] != s[i] ) return result;
 			}
+			result.push_back(strs[0][i]);
 		}
 
-		cout << result << endl;
 		return result;
 	}
 };
@@ -33,11 +28,8 @@ public:
 int main()
 {
 	Solution s;
-	vector<string> strs;
-	strs.push_back("flower");
-	strs.push_back("flow");
-	strs.push_back("flight");
-	s.longestCommonPrefix(strs);
+	vector<string> strs = { "flower", "flo", "flight" };
+	cout << s.longestCommonPrefix(strs);
 
 	return 0;
 }

@@ -23,7 +23,7 @@ int main()
 {
 	Solution s;
 	vector<int> nums { -1 };
+	cout << s.maxSubArray(nums);
 
-	s.maxSubArray(nums);
 	return 0;
 }

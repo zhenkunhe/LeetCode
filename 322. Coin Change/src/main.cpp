@@ -17,12 +17,12 @@ public:
 			for (auto coin : coins)
 			{
 				int preIndex = i - coin;
-				if (preIndex >= 0 && result[preIndex] != -1 && result[preIndex] < min) min = result[preIndex];
+				if ( preIndex >= 0 && result[preIndex] != -1 && result[preIndex] < min ) min = result[preIndex];
 			}
-			result[i] = (min == INT_MAX) ? -1 : min+1;
+			result[i] = (min == INT_MAX) ? -1 : min + 1;
 		}
 
-		return  result[amount];
+		return result[amount];
 	}
 };
 
@@ -39,12 +39,12 @@ public:
 private:
 	void coinChange(vector<int>& coins, int amount, int count, int index, int& res)
 	{
-		if (amount == 0)
+		if ( amount == 0 )
 		{
-			if (count < res) res = count;
+			if ( count < res ) res = count;
 			return;
 		}
-		if (index == coins.size()) return;
+		if ( index == coins.size() ) return;
 
 		for (int k = amount / coins[index]; k >= 0 && count + k < res; k--)
 			coinChange(coins, amount - k * coins[index], count + k, index + 1, res);
@@ -56,6 +56,6 @@ int main()
 	Solution s;
 	vector<int> coins { 1, 2, 5 };
 	int amount = 11;
-	s.coinChange(coins, amount);
+	cout << s.coinChange(coins, amount);
 	return 0;
 }

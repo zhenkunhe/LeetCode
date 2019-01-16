@@ -1,17 +1,7 @@
 #include <iostream>
+#include <tree.hpp>
 
 using namespace std;
-
-struct TreeNode
-{
-	int val;
-	TreeNode *left;
-	TreeNode *right;
-	TreeNode(int x) :
-			val(x), left(NULL), right(NULL)
-	{
-	}
-};
 
 class Solution
 {
@@ -40,12 +30,8 @@ public:
 int main()
 {
 	Solution s;
-	TreeNode* root = new TreeNode(5);
-	root->left = new TreeNode(1);
-	root->right = new TreeNode(5);
-	root->left->left = new TreeNode(5);
-	root->left->right = new TreeNode(5);
-	root->right->right = new TreeNode(5);
+	TreeNode* root = stringToTreeNode("[5,1,5,5,5,null,5]");
+	prettyPrintTree(root);
 
 	cout << s.countUnivalSubtrees(root);
 	return 0;

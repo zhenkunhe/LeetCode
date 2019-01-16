@@ -1,5 +1,6 @@
 #include <iostream>
 #include <map>
+
 using namespace std;
 
 struct ListNode
@@ -20,7 +21,7 @@ public:
 		map<ListNode*, bool> mappings;
 		for (ListNode *i = head; i; i = i->next)
 		{
-			if (mappings.count(i)) return true;
+			if ( mappings.count(i) ) return true;
 			mappings[i] = true;
 		}
 		return false;

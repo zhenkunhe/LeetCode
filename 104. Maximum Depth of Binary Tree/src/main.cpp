@@ -1,17 +1,7 @@
 #include <iostream>
+#include <tree.hpp>
 
 using namespace std;
-
-struct TreeNode
-{
-	int val;
-	TreeNode *left;
-	TreeNode *right;
-	TreeNode(int x) :
-			val(x), left(NULL), right(NULL)
-	{
-	}
-};
 
 // Top-down Solution
 class Solution
@@ -24,8 +14,8 @@ public:
 
 	int maxDepth(TreeNode* root, int depth)
 	{
-		if (!root) return 0;
-		if (!root->left && !root->right) return depth;
+		if ( !root ) return 0;
+		if ( !root->left && !root->right ) return depth;
 		return max(maxDepth(root->left, depth + 1), maxDepth(root->right, depth + 1));
 	}
 };
@@ -36,7 +26,7 @@ class Solution2
 public:
 	int maxDepth(TreeNode* root)
 	{
-		if (!root) return 0;
+		if ( !root ) return 0;
 		int left_ans = maxDepth(root->left);
 		int right_ans = maxDepth(root->right);
 		return max(left_ans, right_ans) + 1;
@@ -46,12 +36,9 @@ public:
 int main()
 {
 	Solution2 s;
-	TreeNode* root = new TreeNode(3);
-	root->left = new TreeNode(9);
-	root->right = new TreeNode(20);
-	root->right->left = new TreeNode(15);
-	root->right->right = new TreeNode(7);
-
+	TreeNode* root = stringToTreeNode("[3,9,20,null,null,15,7]");
+	prettyPrintTree(root);
 	cout << s.maxDepth(root);
+
 	return 0;
 }

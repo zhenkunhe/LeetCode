@@ -13,7 +13,7 @@ public:
 			for (unsigned int j = i + 1; j < height.size(); j++)
 			{
 				int area = min(height[j], height[i]) * (j - i);
-				if (area > max) max = area;
+				if ( area > max ) max = area;
 			}
 		}
 		return max;
@@ -31,7 +31,7 @@ public:
 		while (left < right)
 		{
 			maxarea = max(maxarea, min(height[left], height[right]) * (right - left));
-			if (height[left] < height[right]) left++;
+			if ( height[left] < height[right] ) left++;
 			else right--;
 		}
 		return maxarea;
@@ -40,7 +40,7 @@ public:
 
 int main()
 {
-	Solution3 s;
+	Solution2 s;
 	vector<int> height { 2, 3, 4, 5, 18, 17, 6 };
 	cout << s.maxArea(height);
 	return 0;

@@ -30,7 +30,7 @@ public:
 			temp = temp->next = new ListNode(0);
 			temp->val = sum % 10;
 		}
-		if (carry)
+		if ( carry )
 		{
 			temp = temp->next = new ListNode(0);
 			temp->val = 1;
