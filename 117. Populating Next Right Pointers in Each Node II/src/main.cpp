@@ -1,12 +1,8 @@
 #include <iostream>
+#include <queue>
 #include <tree.hpp>
 
 using namespace std;
-
-/*	        1
-	      2        3
-	  4     5    #     6
-	7#  ##   ##  8#*/
 
 class Solution
 {
@@ -17,41 +13,63 @@ public:
 
 		if ( root->right )
 		{
-			for(TreeLinkNode *next = root->next;next;next = next->next)
+			for (TreeLinkNode *it = root->next; it && !root->right->next; it = it->next)
 			{
-				if ( next->left )
-				{
-					root->right->next = next->left;
-					break;
-				}
-				else if ( next->right )
-				{
-					root->right->next = next->right;
-					break;
-				}
+				if ( it->left ) root->right->next = it->left;
+				else if ( it->right ) root->right->next = it->right;
 			}
 			connect(root->right);
-		}
+		};
+
 		if ( root->left )
 		{
-			if ( root->right ) root->left->next = root->right;
-			else
+			for (TreeLinkNode *it = root; it && !root->left->next; it = it->next)
 			{
-				for(TreeLinkNode *next = root->next;next;next = next->next)
-				{
-					if ( next->left )
-					{
-						root->left->next = next->left;
-						break;
-					}
-					else if ( next->right )
-					{
-						root->left->next = next->right;
-						break;
-					}
-				}
+				if ( it->left && it->left != root->left ) root->left->next = it->left;
+				else if ( it->right ) root->left->next = it->right;
 			}
 			connect(root->left);
+		};
+	}
+};
+
+class Solution2
+{
+public:
+	void connect(TreeLinkNode *root)
+	{
+		if ( !root || (!root->left && !root->right) ) return;
+		TreeLinkNode *tempRoot = root, *tempIter = new TreeLinkNode(-1);
+		while( tempRoot && !tempIter->next )
+		{
+			if ( tempRoot->left ) tempIter = tempIter->next = tempRoot->left;
+			if ( tempRoot->right ) tempIter = tempIter->next = tempRoot->right;
+			tempRoot = tempRoot->next;
+		}
+		connect(root->left);
+		connect(root->right);
+	}
+};
+
+class Solution3
+{
+public:
+	void connect(TreeLinkNode *root)
+	{
+		if ( !root ) return;
+		queue<TreeLinkNode*> q;
+		q.push(root);
+		while( !q.empty() )
+		{
+			int size = q.size();
+			for (int i = 1; i <= size; i++)
+			{
+				TreeLinkNode *front = q.front();
+				q.pop();
+				if ( front->left ) q.push(front->left);
+				if ( front->right ) q.push(front->right);
+				if ( i != size ) front->next = q.front();
+			}
 		}
 	}
 };

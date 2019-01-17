@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 #include <tree.hpp>
 
 using namespace std;
@@ -34,6 +35,29 @@ public:
 		}
 		connect(root->left);
 		connect(root->right);
+	}
+};
+
+class Solution3
+{
+public:
+	void connect(TreeLinkNode *root)
+	{
+		if ( !root ) return;
+		queue<TreeLinkNode*> q;
+		q.push(root);
+		while( !q.empty() )
+		{
+			int size = q.size();
+			for (int i = 1; i <= size; i++)
+			{
+				TreeLinkNode *front = q.front();
+				q.pop();
+				if ( front->left ) q.push(front->left);
+				if ( front->right ) q.push(front->right);
+				if ( i != size ) front->next = q.front();
+			}
+		}
 	}
 };
 
