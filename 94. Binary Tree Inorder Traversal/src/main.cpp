@@ -10,8 +10,8 @@ class Solution
 public:
 	vector<int> inorderTraversal(TreeNode* root)
 	{
-		vector<int> res, left, right;
 		if (!root) return res;
+		vector<int> res, left, right;
 
 		left = inorderTraversal(root->left);
 		right = inorderTraversal(root->right);

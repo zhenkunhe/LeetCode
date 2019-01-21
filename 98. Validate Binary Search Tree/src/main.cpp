@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits.h>
 #include <tree.hpp>
 
 using namespace std;
@@ -8,17 +9,13 @@ class Solution
 public:
 	bool isValidBST(TreeNode* root)
 	{
+		return isValidBST(root, nullptr, nullptr);
+	}
+	bool isValidBST(TreeNode* root, int* low, int* high)
+	{
 		if ( !root ) return true;
-		bool isleft = true, isright = true;
-		if ( root->left )
-		{
-			isleft = isValidBST(root->left) && root->left->val < root->val;
-		}
-		if ( root->right )
-		{
-			isright = isValidBST(root->right) && root->right->val > root->val;
-		}
-		return isright && isleft;
+		if ( (low && root->val <= *low) || (high && root->val >= *high) ) return false;
+		return isValidBST(root->left, low, &root->val) && isValidBST(root->right, &root->val, high);
 	}
 };
 
