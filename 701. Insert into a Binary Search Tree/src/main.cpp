@@ -22,10 +22,7 @@ public:
 	{
 		TreeNode **cur = &root;
 		while (*cur)
-		{
-			if ( val > (*cur)->val ) cur = &(*cur)->right;
-			else cur = &(*cur)->left;
-		}
+			cur = (val > (*cur)->val) ? &(*cur)->right : &(*cur)->left;
 		*cur = new TreeNode(val);
 		return root;
 	}
