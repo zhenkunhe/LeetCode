@@ -8,9 +8,9 @@ public:
 	int maxArea(vector<int>& height)
 	{
 		int max = 0;
-		for (unsigned int i = 0; i < height.size() - 1; i++)
+		for (uint i = 0; i < height.size() - 1; i++)
 		{
-			for (unsigned int j = i + 1; j < height.size(); j++)
+			for (uint j = i + 1; j < height.size(); j++)
 			{
 				int area = min(height[j], height[i]) * (j - i);
 				if ( area > max ) max = area;

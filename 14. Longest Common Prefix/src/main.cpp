@@ -12,7 +12,7 @@ public:
 		string result = "";
 		if ( strs.size() == 0 ) return result;
 
-		for (unsigned int i = 0; i < strs[0].size(); i++)
+		for (uint i = 0; i < strs[0].size(); i++)
 		{
 			for (string s : strs)
 			{

@@ -39,7 +39,7 @@ public:
 private:
 	//  min heap
 	priority_queue<int, vector<int>, greater<int> > pq_;
-	unsigned int k_;
+	uint k_;
 };
 
 class KthLargest2

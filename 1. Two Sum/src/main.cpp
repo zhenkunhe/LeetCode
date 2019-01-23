@@ -12,9 +12,9 @@ public:
 	{
 		vector<int> result;
 
-		for (unsigned int i = 0; i < nums.size() - 1; i++)
+		for (uint i = 0; i < nums.size() - 1; i++)
 		{
-			for (unsigned int j = i + 1; j < nums.size(); j++)
+			for (uint j = i + 1; j < nums.size(); j++)
 			{
 				if (nums[j] == target - nums[i])
 				{
@@ -59,7 +59,7 @@ public:
 	{
 		vector<int> returnVector;
 		map<int, int> IntMap;
-		for (unsigned int i = 0; i < nums.size(); i++)
+		for (uint i = 0; i < nums.size(); i++)
 		{
 			int complement = target - nums[i];
 
