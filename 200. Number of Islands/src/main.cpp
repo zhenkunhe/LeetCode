@@ -9,16 +9,14 @@ class Solution
 public:
 	int numIslands(vector<vector<char>>& grid)
 	{
-		int nr = grid.size();
-		if (!nr) return 0;
-		int nc = grid[0].size();
-		int result = 0;
+		if ( grid.empty() ) return 0;
+		int n = grid[0].size() - 1, m = grid.size() - 1, result = 0;
 
-		for (int r = 0; r < nr; r++)
+		for (int r = 0; r <= m; r++)
 		{
-			for (int c = 0; c < nc; c++)
+			for (int c = 0; c <= n; c++)
 			{
-				if (grid[r][c] == '1')
+				if ( grid[r][c] == '1' )
 				{
 					++result;
 					queue<pair<int, int>> q;
@@ -27,34 +25,34 @@ public:
 
 					while (!q.empty())
 					{
-						pair<int, int> rc = q.front();
+						pair<int, int> front = q.front();
 						q.pop();
 
-						int row = rc.first, col = rc.second;
-						if (col > 0 && grid[row][col - 1] == '1')
+						int r = front.first, c = front.second;
+						if ( c > 0 && grid[r][c - 1] == '1' )
 						{
-							q.push( { row, col - 1 });
-							grid[row][col - 1] = '0';
+							q.push( { r, c - 1 });
+							grid[r][c - 1] = '0';
 						}
-						if (col < nc - 1 && grid[row][col + 1] == '1')
+						if ( c < n && grid[r][c + 1] == '1' )
 						{
-							q.push( { row, col + 1 });
-							grid[row][col + 1] = '0';
+							q.push( { r, c + 1 });
+							grid[r][c + 1] = '0';
 						}
-						if (row > 0 && grid[row - 1][col] == '1')
+						if ( r > 0 && grid[r - 1][c] == '1' )
 						{
-							q.push( { row - 1, col });
-							grid[row - 1][col] = '0';
+							q.push( { r - 1, c });
+							grid[r - 1][c] = '0';
 						}
-						if (row < nr - 1 && grid[row + 1][col] == '1')
+						if ( r < m && grid[r + 1][c] == '1' )
 						{
-							q.push( { row + 1, col });
-							grid[row + 1][col] = '0';
+							q.push( { r + 1, c });
+							grid[r + 1][c] = '0';
 						}
 					}
 				}
-			}//end col
-		}//end row
+			} //end col
+		} //end row
 		return result;
 	}
 };

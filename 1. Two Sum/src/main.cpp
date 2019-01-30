@@ -16,7 +16,7 @@ public:
 		{
 			for (uint j = i + 1; j < nums.size(); j++)
 			{
-				if (nums[j] == target - nums[i])
+				if ( nums[j] == target - nums[i] )
 				{
 					result.push_back(i);
 					result.push_back(j);
@@ -41,7 +41,7 @@ public:
 			for (vectorIterator2 = next(vectorIterator1); vectorIterator2 != nums.end(); ++vectorIterator2)
 			{
 				num2 = target - num1;
-				if (*vectorIterator2 == num2)
+				if ( *vectorIterator2 == num2 )
 				{
 					returnVector.push_back(distance(nums.begin(), vectorIterator1));
 					returnVector.push_back(distance(nums.begin(), vectorIterator2));
@@ -63,7 +63,7 @@ public:
 		{
 			int complement = target - nums[i];
 
-			if (IntMap.find(complement) != IntMap.end())
+			if ( IntMap.find(complement) != IntMap.end() )
 			{
 				returnVector.push_back(IntMap.find(complement)->second);
 				returnVector.push_back(i);

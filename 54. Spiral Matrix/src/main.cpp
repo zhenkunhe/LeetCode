@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <utility>
-
+#include <string.h>
 using namespace std;
 
 class Solution
@@ -11,60 +10,53 @@ public:
 	{
 		vector<int> res;
 		if ( matrix.size() == 0 ) return res;
-		int size_r = matrix.size() - 1;
-		int size_c = matrix[0].size() - 1;
-		bool b_matrix[size_r][size_c];
-		for (int i = 0; i <= size_r; i++)
-		{
-			for (int j = 0; j <= size_c; j++)
-			{
-				b_matrix[i][j] = false;
-			}
-		}
+		int m = matrix.size() - 1, n = matrix[0].size() - 1;
+		bool trav[m + 1][n + 1];
+		memset(trav, false, sizeof(bool) * (m + 1) * (n + 1));
 
-		int r = 0, c = 0, dir = 0;
-		res.push_back(matrix[r][c]);
-		b_matrix[r][c] = true;
+		int r = 0, c = 0;
+		int dir = (c == n) ? 1 : 0;
+
+		while (r <= m && r >= 0 && c <= n && c >= 0 && !trav[r][c])
+		{
+			res.push_back(matrix[r][c]);
+			trav[r][c] = true;
+			if ( dir == 0 && (++c >= n || trav[r][c + 1]) ) ++dir %= 4;
+			else if ( dir == 1 && (++r >= m || trav[r + 1][c]) ) ++dir %= 4;
+			else if ( dir == 2 && (--c <= 0 || trav[r][c - 1]) ) ++dir %= 4;
+			else if ( dir == 3 && (--r <= 0 || trav[r - 1][c]) ) ++dir %= 4;
+		}
+		return res;
+	}
+};
+
+class Solution2
+{
+public:
+	vector<int> spiralOrder(vector<vector<int>>& matrix)
+	{
+		vector<int> res;
+		if ( matrix.empty() ) return res;
+		int m = matrix.size(), n = matrix[0].size();
+		int u = 0, d = m - 1, l = 0, r = n - 1;
 		while (true)
 		{
-			switch (dir)
-			{
-			case 0:
-				c = c + 1;
-				cout  << c << endl;
-				cout  << b_matrix[r][c + 1] << endl;
-				if ( c == size_c || b_matrix[r][c + 1] ) dir = 1;
-				cout  <<  b_matrix[r][c + 1] << endl;
-				break;
-			case 1:
-				r = r + 1;
-				cout  << c << endl;
-				cout  << b_matrix[r][c + 1] << endl;
-				if ( r == size_r || b_matrix[r + 1][c] ) dir = 2;
-				cout  <<  b_matrix[r][c + 1] << endl;
-				break;
-			case 2:
-				c = c - 1;
-				if ( c == 0 || b_matrix[r][c - 1] ) dir = 3;
-				break;
-			case 3:
-				r = r - 1;
-				if ( r == 0 || b_matrix[r - 1][c] ) dir = 0;
-				break;
-			}
-
-			if ( b_matrix[r][c] ) break;
-			res.push_back(matrix[r][c]);
-			b_matrix[r][c] = true;
-			for (int i = 0; i <= size_r; i++)
-			{
-				for (int j = 0; j <= size_c; j++)
-				{
-					cout << b_matrix[i][j] << "\t";
-				}
-				cout << endl;
-			}
-			cout << endl;
+			// up
+			for (int col = l; col <= r; col++)
+				res.push_back(matrix[u][col]);
+			if ( ++u > d ) break;
+			// right
+			for (int row = u; row <= d; row++)
+				res.push_back(matrix[row][r]);
+			if ( --r < l ) break;
+			// down
+			for (int col = r; col >= l; col--)
+				res.push_back(matrix[d][col]);
+			if ( --d < u ) break;
+			// left
+			for (int row = d; row >= u; row--)
+				res.push_back(matrix[row][l]);
+			if ( ++l > r ) break;
 		}
 		return res;
 	}
