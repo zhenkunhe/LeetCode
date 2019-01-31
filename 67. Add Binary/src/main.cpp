@@ -9,17 +9,16 @@ public:
 	string addBinary(string a, string b)
 	{
 		string res;
-		string::reverse_iterator it_a = a.rbegin(), it_b = b.rbegin();
-		bool carry = false;
-		while (it_a != a.rend() || it_b != b.rend())
+		bool carry = false, da = false, db = false;
+
+		for (string::reverse_iterator it_a = a.rbegin(), it_b = b.rbegin(); it_a != a.rend() || it_b != b.rend();)
 		{
-			bool da = it_a != a.rend() ? (bool) (*(it_a) - '0') : false;
-			bool db = it_b != b.rend() ? (bool) (*(it_b) - '0') : false;
-			res.insert(res.begin(), ((!da & !db & carry | !da & db & !carry | da & db & carry | da & !db & !carry) + '0'));
-			carry = db & carry | db & da | da & carry;
-			if ( it_a != a.rend() ) it_a++;
-			if ( it_b != b.rend() ) it_b++;
+			da = it_a != a.rend() ? *it_a++ - '0' : false;
+			db = it_b != b.rend() ? *it_b++ - '0' : false;
+			res.insert(res.begin(), (!da & !db & carry) | (!da & db & !carry) | (da & db & carry) | (da & !db & !carry) + '0');
+			carry = (db & carry) | (db & da) | (da & carry);
 		}
+
 		if ( carry ) res.insert(res.begin(), '1');
 
 		return res;
