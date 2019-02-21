@@ -17,24 +17,18 @@ public:
 	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2)
 	{
 		ListNode* result = new ListNode(0);
-		ListNode* temp = result;
-		int carry = 0, sum = 0;
-
-		while (l1 || l2)
+		ListNode* cur = result;
+		int sum = 0;
+		bool carry = false;
+		while( l1 || l2 )
 		{
 			sum = (l1 ? l1->val : 0) + (l2 ? l2->val : 0) + carry;
 			carry = sum / 10;
-			l1 = l1 ? l1->next : NULL;
-			l2 = l2 ? l2->next : NULL;
-
-			temp = temp->next = new ListNode(0);
-			temp->val = sum % 10;
+			l1 = l1 ? l1->next : nullptr;
+			l2 = l2 ? l2->next : nullptr;
+			cur = cur->next = new ListNode(sum % 10);
 		}
-		if ( carry )
-		{
-			temp = temp->next = new ListNode(0);
-			temp->val = 1;
-		}
+		if ( carry ) cur = cur->next = new ListNode(1);
 		return result->next;
 	}
 };
@@ -47,6 +41,7 @@ int main()
 	ListNode* l2 = new ListNode(1);
 	l2->next = new ListNode(9);
 	l2->next->next = new ListNode(9);
+
 	s.addTwoNumbers(l1, l2);
 	return 0;
 }
